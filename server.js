@@ -29,10 +29,6 @@ server.get('/movie', moviesFunction);
 
 server.get('/static', staticMoviesFunction);
 
-
-
-
-
 // servers 
 
 
