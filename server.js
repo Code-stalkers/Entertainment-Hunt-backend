@@ -16,6 +16,7 @@ let PORT = process.env.PORT;
 
 const gameData = require('./gameModule');
 
+
 const staticMoviesFunction=require('./Static')
 const moviesFunction=require('./Movies')
 
@@ -30,12 +31,7 @@ server.get('/movie', moviesFunction);
 server.get('/static', staticMoviesFunction);
 
 
-
-
-
 // servers 
-
-
 
 // http://localhost:3001/game?title=dota
 
@@ -58,41 +54,6 @@ server.get('*', (req, res) => {
 server.listen(PORT, () => {
     console.log(`GOOD to have you along on this ${PORT}`);
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
