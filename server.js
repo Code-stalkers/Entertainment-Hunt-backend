@@ -1,12 +1,13 @@
 
 'use strict'
+
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const server = express();
 server.use(cors());
 const axios = require('axios');
-let PORT = process.env.PORT;
+let PORT = 3001;
 
 
 //MongoDB
@@ -15,6 +16,7 @@ let PORT = process.env.PORT;
 // routes 
 
 const gameData = require('./gameModule');
+
 
 const staticMoviesFunction=require('./Static')
 const moviesFunction=require('./Movies')
@@ -30,8 +32,6 @@ server.get('/movie', moviesFunction);
 server.get('/static', staticMoviesFunction);
 
 // servers 
-
-
 
 // http://localhost:3001/game?title=dota
 
@@ -54,41 +54,6 @@ server.get('*', (req, res) => {
 server.listen(PORT, () => {
     console.log(`GOOD to have you along on this ${PORT}`);
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
