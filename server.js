@@ -1,12 +1,13 @@
 
 'use strict'
+
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const server = express();
 server.use(cors());
 const axios = require('axios');
-let PORT = process.env.PORT;
+let PORT = 3001;
 
 
 //MongoDB
@@ -29,7 +30,6 @@ server.get('/movie', moviesFunction);
 // http://localhost:3001/movie
 
 server.get('/static', staticMoviesFunction);
-
 
 // servers 
 
