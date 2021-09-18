@@ -7,7 +7,7 @@ const cors = require('cors');
 const server = express();
 server.use(cors());
 const axios = require('axios');
-const PORT = 3001;
+// const PORT = 3001;
 
 
 
@@ -18,7 +18,7 @@ const staticMoviesFunction = async function (req,res) {
 
     
 
-    let url= await `https://www.omdbapi.com/?s=all&apikey=da2fe669`;
+    let url= await `https://www.omdbapi.com/?s=all&apikey=da2fe669&y=2021`;
 
     await axios.get(url)
     
