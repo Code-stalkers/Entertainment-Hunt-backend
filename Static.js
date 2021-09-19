@@ -1,6 +1,7 @@
 
 
 'use strict'
+let comment='';
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
@@ -23,6 +24,7 @@ async function main() {
       Poster:String,
       Type:String,
       Year:String,
+      comment:String,
      
   });
 
@@ -45,13 +47,33 @@ async function saving() {
 }
 
 
+function updateCommentHandler(req,res) {
+    const filmId = req.params.id
+    // const email = req.query.email;
+    const {Title,Year,Type,Poster,comment}=req.body;
+  
+  
+    
+  
+    films.findByIdAndUpdate(filmId,{Title,Year,Type,comment,Poster},(err,result)=>{
+        films.find({},(err,result)=>{
+       
+              res.send(result);
+          
+      })
+  })
+  }
+  
+
+
 function addingWatchlist(req,res) {
     
     const movieList=new films ({
          Title: req.query.Title,
        Poster : req.query.Poster,
         Type : req.query.Type,
-        Year : req.query.Year})
+        Year : req.query.Year,
+        comment : ''})
 
     // let movieList=req.query;
     
@@ -78,7 +100,7 @@ const staticMoviesFunction = async function (req,res) {
         
         let staticMovieData=dataFromUrl.data.Search.map(item =>{
 
-            return new Static(item.Title, item.Poster, item.Year,item.Type)
+            return new Static(item.Title, item.Poster, item.Year,item.Type,comment)
          
     })
     console.log(staticMovieData);
@@ -91,18 +113,20 @@ const staticMoviesFunction = async function (req,res) {
 }
 
 class Static{
+    
 
-    constructor(Title,Poster,Year,Type){
+    constructor(Title,Poster,Year,Type,comment){
 
         this.Title=Title;
         this.Poster=Poster;
         
         this.Year=Year;
-        this.Type=Type
+        this.Type=Type;
+        this.comment='comment'
        
     }
 
 }
 
 
-module.exports ={ staticMoviesFunction , addingWatchlist }
+module.exports ={ staticMoviesFunction , addingWatchlist,updateCommentHandler }

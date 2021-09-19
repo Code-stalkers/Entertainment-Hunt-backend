@@ -136,7 +136,8 @@ const gameData = require('./gameModule');
 
 // const staticMoviesFunction=require('./Static')
 
-const {addingWatchlist,staticMoviesFunction}=require('./Static.js')
+const {addingWatchlist,staticMoviesFunction,updateCommentHandler}=require('./Static.js')
+
 const moviesFunction=require('./Movies')
 
 //MongoDB
@@ -154,6 +155,13 @@ server.get('/static', staticMoviesFunction);
 // http://localhost:3001/addToWatchlist
 
 server.get('/addToWatchlist',addingWatchlist)
+
+
+server.put('/updateComment/:id',updateCommentHandler);
+
+
+
+
 
 
 // function addingWatchlist(req,res) {
