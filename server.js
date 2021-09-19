@@ -7,6 +7,7 @@ const cors = require('cors');
 const server = express();
 server.use(cors());
 const axios = require('axios');
+const crypto = require('./crypto');
 let PORT = process.env.PORT||3001;
 
 //MongoDB
@@ -152,6 +153,14 @@ server.get('/static', staticMoviesFunction);
 
 
 server.get('/game', gameData);
+
+// http://localhost:3001/cryptoMarketCap
+
+server.get('/cryptoMarketCap', crypto.marketCap );
+
+server.get('/cryptoCoins', crypto.top20Coins );
+
+server.get('/cryptoRecommendation/:coin', crypto.recommendation);
 
 server.get('/', (req, res) => {
     res.send('YOU are on THE home route')
