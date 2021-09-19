@@ -52,6 +52,20 @@ async function gameData (req, res) {
 }
 
 
-// server.get('/game', gameData);
-module.exports = gameData
+// function updateGameHandler(req,res) {
+//     const id = req.params.id;
+//     const {title,Type,Year} = req.body;
+//     gameModal.findByIdAndUpdate(id,{title,Type,Year},(err,result)=>{
+//         gameModal.find({ email: email }, (error, result) => {
 
+//             res.send(result);
+
+//         })
+//     })
+
+// }
+
+
+
+// server.get('/game', gameData);
+module.exports = gameData;

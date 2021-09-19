@@ -16,8 +16,10 @@ const PORT = 3001;
 const moviesFunction = async function (req,res) {
 
     let title =req.query.title;
+    let year =req.query.year;
+    let type=req.query.type;
 
-    let url= await `https://www.omdbapi.com/?s=${title}&apikey=da2fe669`;
+    let url= await `https://www.omdbapi.com/?s=${title}&apikey=da2fe669&y=${year}&type=${type}`;
 
     await axios.get(url)
     
