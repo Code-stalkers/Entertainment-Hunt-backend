@@ -6,7 +6,7 @@ const cors = require('cors');
 const server = express();
 server.use(cors());
 const axios = require('axios');
-const PORT = 3001;
+
 
 
 
@@ -31,7 +31,7 @@ const moviesFunction = async function (req,res) {
             return new Movie(item.Title, item.Poster, item.Year,item.Type)
          
     })
-    console.log(movieData);
+    // console.log(movieData);
 
     res.send(movieData)
   

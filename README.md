@@ -6,7 +6,7 @@
 touch server.js
 npm init -y
 npm i express cors dotenv axios
-
+npm install mongoose
 sudo service mongodb start
 1- open MongoDB shell :
 mongo
