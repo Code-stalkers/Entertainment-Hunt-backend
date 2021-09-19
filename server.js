@@ -144,6 +144,9 @@ async function addGameHandler(req,res){
        Year:Year,
        email:email
    })
+   gamesModel.find({email:email},(err,result)=>{
+    res.send(result);
+        })
    
 }
 
