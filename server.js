@@ -10,13 +10,20 @@ const axios = require('axios');
 const crypto = require('./crypto');
 let PORT = process.env.PORT||3001;
 
+
+
+server.use(express.json());
 //MongoDB
  const mongoose = require('mongoose');
+
+  mongoose.connect('mongodb://can-of-books:Ahmad123456@cluster0-shard-00-00.bffsy.mongodb.net:27017,cluster0-shard-00-01.bffsy.mongodb.net:27017,cluster0-shard-00-02.bffsy.mongodb.net:27017/Entertainment-hunt?ssl=true&replicaSet=atlas-13akp3-shard-0&authSource=admin&retryWrites=true&w=majority');
+  crypto.main().catch(err => console.log(err));
+  
  let gamesModel;
- main().catch(err => console.log(err));
+//  main().catch(err => console.log(err));
  
  async function main() {
-    await  mongoose.connect('mongodb://localhost:27017/game');
+    // await  mongoose.connect('mongodb://localhost:27017/game');
  
    const gameSchema = new mongoose.Schema({
      Title: String,
@@ -161,6 +168,10 @@ server.get('/cryptoMarketCap', crypto.marketCap );
 server.get('/cryptoCoins', crypto.top20Coins );
 
 server.get('/cryptoRecommendation/:coin', crypto.recommendation);
+
+server.get('/cryptoSearch',crypto.search);
+
+server.post('/addRecommendation',crypto.addRecommendation);
 
 server.get('/', (req, res) => {
     res.send('YOU are on THE home route')
