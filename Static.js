@@ -9,34 +9,34 @@ const axios = require('axios');
 server.use(express.json());
 
 
-///////////////////////mongo
-const mongoose = require('mongoose');
+// ///////////////////////mongo
+// const mongoose = require('mongoose');
 
-let films;
-main().catch(err => console.log(err));
+// let films;
+// main().catch(err => console.log(err));
 
-async function main() {
-    await mongoose.connect(`mongodb://localhost:27017/movie`);
+// async function main() {
+//     await mongoose.connect(`mongodb://localhost:27017/films`);
 
-    // await mongoose.connect(`mongodb://Mohammad-Haroun-97:awdsef135.@myfirstcluster-shard-00-00.xvzzr.mongodb.net:27017,myfirstcluster-shard-00-01.xvzzr.mongodb.net:27017,myfirstcluster-shard-00-02.xvzzr.mongodb.net:27017/Films?ssl=true&replicaSet=atlas-tlumk8-shard-0&authSource=admin&retryWrites=true&w=majority`);
-    const filmsSchema = new mongoose.Schema({
-        Title: String,
-        Poster: String,
-        Type: String,
-        Year: String,
-        email: String,
-        comment: String
+//     // await mongoose.connect(`mongodb://Mohammad-Haroun-97:awdsef135.@myfirstcluster-shard-00-00.xvzzr.mongodb.net:27017,myfirstcluster-shard-00-01.xvzzr.mongodb.net:27017,myfirstcluster-shard-00-02.xvzzr.mongodb.net:27017/Films?ssl=true&replicaSet=atlas-tlumk8-shard-0&authSource=admin&retryWrites=true&w=majority`);
+//     const filmsSchema = new mongoose.Schema({
+//         Title: String,
+//         Poster: String,
+//         Type: String,
+//         Year: String,
+//         email: String,
+//         comment: String
 
-    });
-
-
-    films = mongoose.model('Films', filmsSchema);
-
-    saving()
+//     });
 
 
+//     films = mongoose.model('films', filmsSchema);
 
-}
+//     saving()
+
+
+
+// }
 async function saving() {
 }
 
