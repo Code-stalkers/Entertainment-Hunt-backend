@@ -1,4 +1,3 @@
-
 'use strict'
 
 require('dotenv').config();
@@ -8,183 +7,123 @@ const server = express();
 server.use(cors());
 const axios = require('axios');
 let PORT = process.env.PORT||3001;
+server.use(express.json());
 
 //MongoDB
- const mongoose = require('mongoose');
- let gamesModel;
- let commentModel;
-
- main().catch(err => console.log(err));
+//  const mongoose = require('mongoose');
+//  let gamesModel;
+// //  let commentsModel;
+//  main().catch(err => console.log(err));
  
- async function main() {
-    //  await  mongoose.connect('mongodb://localhost:27017/game');
-     await  mongoose.connect('mongodb://localhost:27017/comment');
-   const gameSchema = new mongoose.Schema({
-     Title: String,
-     Poster: String,
-     Type: String,
-     Year: String
-   });
-   const CommentSchema = new mongoose.Schema({
-    author: String,
-    movie:String,
-    content: String
-  });
-  commentModel = mongoose.model('comment', CommentSchema);
-   gamesModel = mongoose.model('game', gameSchema);
-  
-          //  seedData();
- }
+//  async function main() {
+//     await  mongoose.connect('mongodb://localhost:27017/game');
+ 
+//    const gameSchema = new mongoose.Schema({
+//      Title: String,
+//      Poster: String,
+//      Type: String,
+//      Year: String,
+//      email:String,
+//      comment:''
+//    });
+//   //  const commentsModel = new mongoose.Schema({
+//   //   Title: String,
+//   //   email: String,
+//   //   content: String
+    
+//   // });
+//   //  commentsModel = mongoose.model('comments', commentsSchema);
+//    gamesModel = mongoose.model('game', gameSchema);
+ 
+//     //   seedData();
+//  }
  
  //seeding a data function 
  async function seedData() {
-    //  const dataaa = require('./Static');
+    // const dataaa = require('./gameModule');
     // let Memory = dataaa.Memory;
     // Memory = new gamesModel
-    
-    const comment1 = new commentModel ({
-      author: "marwanamir.ma@gmail.com",
-    content:  "This is my first comment on this forum so don't be a rude"
-
-  });
-  const comment2 = new commentModel ({
-    author: "scarlett-jo",
-  content:  "That's a mighty fine comment you've got there my good looking fellow..."
-
-});
-const comment3 = new commentModel ({
-  author: "rosco",
-content:  "What is the meaning of all of this 'React' mumbo-jumbo?"
-
-});
-
- 
+    // Memory.loadDatabase();
    const game = new gamesModel({
      Title: 'War and Peace',
-     Poster: `War and Peace broadly focuses on Napoleon’s invasion of Russia in 1812 and follows three of the most well-known characters
-      in literature: Pierre Bezukhov, the illegitimate son of a count who is fighting for his inheritance and yearning for spiritual fulfillment;
-       Prince Andrei Bolkonsky, who leaves his family behind to fight in the war against Napoleon; and Natasha Rostov, the beautiful young daughter of a nobleman who intrigues both men.
+     Poster: `War and Peace broadly focuses on Napoleon’s invasion of Russia in 1812 and follows three of the most well-known characters in literature: Pierre Bezukhov, the illegitimate son of a count who is fighting for his inheritance and yearning for spiritual fulfillment; Prince Andrei Bolkonsky, who leaves his family behind to fight in the war against Napoleon; and Natasha Rostov, the beautiful young daughter of a nobleman who intrigues both men.
      A s Napoleon’s army invades, Tolstoy brilliantly follows characters from diverse backgrounds—peasants and nobility, civilians and soldiers—as they struggle with the problems unique to their era, their history, and their culture. And as the novel progresses, these characters transcend their specificity, becoming some of the most moving—and human—figures in world literature.
      `,
      Type: 'https://images-na.ssl-images-amazon.com/images/I/A1aDb5U5myL.jpg',
      Year: 'marwanamir.ma@gmail.com'
-
    });
-     await comment1.save();
-     await comment2.save();
-     await comment3.save();
-      await game.save();
+  //   const comment = new commentsModel({
+  //   Title: 'War and Peace',
+  //   email:  '',
+  //   content: ''
+  // });
+ 
+    
+     
+
+     await game.save();
+    //  await Memory.insert();
+     
+    //  console.log(Memory)
  }
- function getcommentsHandler(req,res){
-  const email = req.query.email;
-  commentModel.find({author:email},(err,result)=>{
-      if(err)
-      {
-          console.log(err);
-      }
-      else
-      {
-          res.send(result);
-      }
-  })
-}
-  
-
-//  function name(){
-
-//   console.log(server.get('/static', staticMoviesFunction));
-//   // staticMoviesFunction().then(item => console.log(item))
 
 
-//  }
-//  name()
-// Routes
-   const staticMoviesFunction=require('./Static')
- server.get('/comment', getcommentsHandler);
-// server.post('/game', getgameHandler);
-// server.delete('/deleterouteName/:id', delete);
-// server.put('/updaterouteName/:id',update);
+// routes 
+// async function addCommentsforGameHandler(req,res){
+//   const Title=req.body.Title;
+//   const email=req.body.email;
 
-
-// Functions Handlers
-
-//  function  getgameHandler(req, res) {
-//   const title = req.body.title;
-//   const description = req.body.description;
-//   const status = req.body.status;
-//   const authoremail = req.body.authoremail;
-//   // const { title, description, authoremail } = req.body;
-//   await booksModle.create({
-//     title: title,
-//     description: description,
-//     status: status,
-//     authoremail: authoremail
-//   });
-
-//   booksModle.find({ authoremail: authoremail }, (err, result) => {
-//     if (err) {
-//       console.log(err);
-//     }
-//     else {
-//       res.send(result);
-//     }
+//   await gamesModel.create({
+//     Title:Title,
+//     email:email
 //   })
-
-// }
+//   gamesModel.find({email:email},(err,result)=>{
+//    res.send(result);
+//        })
   
-// async function add(req, res) {
-//   await ModelNAME.create({
+// }
+// server.post('/comments',addCommentsforGameHandler)
+
+// async function addGameHandler(req,res){
+//    const Title=req.body.Title;
+//    const Poster=req.body.Poster;
+//    const Type=req.body.Type;
+//    const Year=req.body.Year;
+//    const email=req.body.email;
+//    const Comment=req.body.Comment;
+
+//    await gamesModel.create({
+//      Title:Title,
+//        Poster:Poster,
+//        Type:Type,
+//        Year:Year,
+//        email:email,
+//        Comment : Comment
+//    })
+//    gamesModel.find({email:email},(err,result)=>{
+//     res.send(result);
+//         })
    
-//   });
-
-//   ModelNAME.find({ authoremail: authoremail }, (err, result) => {
-//     if (err) {
-//       console.log(err);
-//     }
-//     else {
-//       res.send(result);
-//     }
-//   })
-
-// }
-
-// function delete(req, res) {
-
-//   ModelNAME.deleteOne({}, (err, result) => {
-
-//     ModelNAME.find({  }, (err, result) => {
-//       if (err) {
-//         console.log(err);
-//       }
-//       else {
-//         res.send(result);
-//       }
-//     })
-
-//   })
-
-
-// }
-
-// function get(req, res) {
-//   ModelNAME.find({}, (err, result) => {
-//     if (err) {
-//       console.log(err);
-//     }
-//     else {
-//       res.send(result);
-//     }
-
-//   })
 // }
 
 
 
 
-// function update(req,res) {
 
-//   ModelNAME.findByIdAndUpdate(id,{},(err,result)=>{
-//     ModelNAME.find({authoremail:authoremail},(err,result)=>{
+
+
+// function updateGamewithCommentHandler(req,res) {
+//   const id = req.params.id;
+//   const Title = req.body.Title;
+//   const Poster=req.body.Poster;
+//   const Type=req.body.Type;
+//   const Year=req.body.Year;
+//   const email = req.body.email;
+//   const comment=req.body.Comment;
+  
+  
+//   gamesModel.findByIdAndUpdate(id,{Title,Poster,Type,Year,comment},(err,result)=>{
+//     gamesModel.find({email:email},(err,result)=>{
 //           if(err)
 //           {
 //               console.log(err);
@@ -197,7 +136,17 @@ content:  "What is the meaning of all of this 'React' mumbo-jumbo?"
 //   })
 // }
 
-// routes 
+
+// server.put('/updateCommentHandler/:id',updateGamewithCommentHandler);  
+
+
+
+const {addingWatchlist,staticMoviesFunction,getfilmssHandler}=require('./Static.js')
+
+server.get('/addToWatchlist', getfilmssHandler);
+
+server.post('/addToWatchlist',addingWatchlist)
+
 
 const gameData = require('./gameModule');
 
@@ -209,11 +158,13 @@ const moviesFunction=require('./Movies')
 
 // http://localhost:3001
 
+// server.post('/addGame',addGameHandler)
+
 server.get('/movie', moviesFunction);
 
 // http://localhost:3001/movie
 
- server.get('/static', staticMoviesFunction);
+server.get('/static', staticMoviesFunction);
 
 // servers 
 
@@ -238,9 +189,3 @@ server.get('*', (req, res) => {
 server.listen(PORT, () => {
     console.log(`GOOD to have you along on this ${PORT}`);
 });
-
-
-
-
-
-

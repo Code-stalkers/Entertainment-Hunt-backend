@@ -1,3 +1,4 @@
+
 'use strict'
 require('dotenv').config();
 // const express = require('express');
@@ -6,6 +7,8 @@ require('dotenv').config();
 // server.use(cors());
 const axios = require('axios');
 let Memory = {};
+
+
 //MongoDB
 // const mongoose = require('mongoose');
 
@@ -37,7 +40,6 @@ async function gameData (req, res) {
         await axios
             .get(url)
             .then(data => {
-                
                 let newGAME = data.data.Search.map(item => {
                     return new GAME(item.Title,item.Poster,item.Type,item.Year);
                 })
@@ -46,16 +48,10 @@ async function gameData (req, res) {
             })
             .catch(err => console.log(err))
 
-            // exports.Memory=Memory
       }
-      //   console.log(Memory)
-    }
     
+}
 
 
 // server.get('/game', gameData);
 module.exports = gameData
-
-
-
-

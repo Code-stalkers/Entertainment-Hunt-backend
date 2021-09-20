@@ -6,15 +6,7 @@ const cors = require('cors');
 const server = express();
 server.use(cors());
 const axios = require('axios');
-
-
-
-
-
-
-
 const moviesFunction = async function (req,res) {
-
     let title =req.query.title;
     let year =req.query.year;
     let type=req.query.type;
