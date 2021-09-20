@@ -8,6 +8,7 @@ const server = express();
 server.use(cors());
 const axios = require('axios');
 let PORT = 3001;
+server.use(express.json());
 
 
 //MongoDB
@@ -136,11 +137,11 @@ const gameData = require('./gameModule');
 
 // const staticMoviesFunction=require('./Static')
 
-const {addingWatchlist,staticMoviesFunction,updateCommentHandler}=require('./Static.js')
+const {addingWatchlist,staticMoviesFunction,updateCommentHandler,userAddingList}=require('./Static.js')
 
 // const userAddingList=require('./Movies.js')
 
-const {userAddingList,moviesFunction}=require('./Movies.js')
+const {moviesFunction}=require('./Movies.js')
 
 // const moviesFunction=require('./Movies')
 
@@ -160,7 +161,9 @@ server.get('/static', staticMoviesFunction);
 
 server.get('/addToWatchlist',addingWatchlist)
 
-server.get('/userAddingList',userAddingList)
+server.post('/userAddingList',userAddingList)
+
+
 
 server.put('/updateComment/:id',updateCommentHandler);
 

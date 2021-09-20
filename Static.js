@@ -8,6 +8,7 @@ const cors = require('cors');
 const server = express();
 server.use(cors());
 const axios = require('axios');
+
 // const PORT = 3001;
 
 
@@ -62,7 +63,7 @@ function updateCommentHandler(req,res) {
   
 
 
-  
+
 
 
 function addingWatchlist(req,res) {
@@ -80,6 +81,30 @@ function addingWatchlist(req,res) {
 
     movieList.save();
     res.send('hello')
+    
+}
+
+
+function userAddingList(req,res) {
+    
+    const var1=req.body
+    console.log('varrrr',var1);
+    
+    const userMovieList=new films
+     ({
+         Title:  req.body.userObjEst.Title,
+       Poster : req.body.userObjEst.Poster,
+        Type : req.body.userObjEst.Type,
+        Year : req.body.userObjEst.Year,
+        comment : ''})
+
+    
+    
+    console.log('final',userMovieList);
+
+    userMovieList.save();
+
+    res.send(var1)
     
 }
 
@@ -128,4 +153,7 @@ class Static{
 }
 
 
-module.exports ={ staticMoviesFunction , addingWatchlist,updateCommentHandler }
+
+
+
+module.exports ={ staticMoviesFunction , addingWatchlist,updateCommentHandler,userAddingList }
