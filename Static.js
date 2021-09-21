@@ -1,5 +1,4 @@
 
-
 'use strict'
 let comment='';
 require('dotenv').config();
@@ -8,6 +7,7 @@ const cors = require('cors');
 const server = express();
 server.use(cors());
 const axios = require('axios');
+server.use(express.json());
 
 // const PORT = 3001;
 
