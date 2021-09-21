@@ -65,7 +65,7 @@ obj.search = function(req,res){
 obj.addRecommendation = async function (req, res) {
     const { name, coin, description } = req.body;
     await recommendationModel.create({ name, coin, description});
-    recommendationModel.find({ name: name }, (err, result) => {
+    recommendationModel.find({ coin: coin }, (err, result) => {
       if (err) console.log("error");
       else{
           console.log(result); 
