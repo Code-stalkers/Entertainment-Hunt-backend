@@ -1,21 +1,99 @@
 'use strict'
 require('dotenv').config();
-// const express = require('express');
-// const cors = require('cors');
-// const server = express();
-// server.use(cors());
+const express = require('express');
+const cors = require('cors');
+const server = express();
+server.use(cors());
 const axios = require('axios');
+server.use(express.json());
 let Memory = {};
+let obj = {};
+const mongoose = require('mongoose');
+
+let game;
+
+obj.main= async function() {
+    const gameSchema = new mongoose.Schema({
+        Title: String,
+        Poster: String,
+        Type: String,
+        Year: String,
+        email: String,
+        comment: String
+
+    });
 
 
-//MongoDB
-// const mongoose = require('mongoose');
+    game = mongoose.model('game', gameSchema);
+
+    obj.saving()
+
+}
+ obj.saving= async function() {
+}
+// addingWatchlist
+ obj.addingfavelist=async function(req, res) {
+    const Title = req.body.Title;
+    const Poster = req.body.Poster;
+    const Type = req.body.Type;
+    const Year = req.body.Year;
+    const email = req.body.email;
+    // const { title, description, authoremail } = req.body;
+    await game.create({
+        Title: Title,
+        Poster: Poster,
+        Type: Type,
+        Year: Year,
+        email:email,
+    });
+    //  console.log(req.body)
+    game.find({ email: email }, (err, result) => {
+      if (err) {
+        console.log(err);
+      }
+      else {
+          
+        res.send(result);
+      }
+    })
+  
+  }
 
 
-// movie API key apikey=da2fe669
-// https://www.omdbapi.com/?s=SOMETHING&apikey=da2fe669 this is for serching for a movie title
+//   getfilmssHandler to render
 
-//https://www.omdbapi.com/?s=warzone&apikey=da2fe669&type=game
+obj.getgameHandler= function(req, res) {
+    const email = req.query.email;
+    console.log(email)
+    game.find({ email: email }, (err, result) => {
+      if (err) {
+        console.log(err);
+      }
+
+      else {
+          console.log(result)
+        res.send(result);
+      }
+  
+    })
+  }
+  
+
+   obj.addingcommentlist= function(req, res) {
+     const filmId = req.params.id
+        // const email = req.query.email;
+        const {Title,Year,Type,Poster,comment}=req.body;
+      
+        films.findByIdAndUpdate(filmId,{Title,Year,Type,comment,Poster},(err,result)=>{
+            films.find({ email: email  },(err,result)=>{
+                  res.send(result);
+              console.log(result)
+          })
+      })}
+      
+    
+
+
 class GAME {
     constructor(Title,Poster,Type,Year) {
         this.Title=Title
@@ -26,7 +104,7 @@ class GAME {
         
     }
 }
-async function gameData (req, res) {
+ obj.gameData =async function (req, res) {
     const title = req.query.title;
     if (Memory[title] !== undefined) {
         res.send(Memory[title]);
@@ -53,5 +131,8 @@ async function gameData (req, res) {
 
 
 // server.get('/game', gameData);
-module.exports = gameData
+module.exports = obj;
 
+
+// function updateCommentHandler(req,res) {
+   
