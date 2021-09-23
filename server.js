@@ -11,7 +11,7 @@ const crypto = require('./crypto');
 const statics =require('./Static.js');
 const movie=require('./Movies.js');
 const game = require('./gameModule');
-let PORT = process.env.PORT||3001;
+let PORT = process.env.PORT;
 
 
 
@@ -19,7 +19,7 @@ server.use(express.json());
 //MongoDB
  const mongoose = require('mongoose');
 
-  mongoose.connect('mongodb://can-of-books:Ahmad123456@cluster0-shard-00-00.bffsy.mongodb.net:27017,cluster0-shard-00-01.bffsy.mongodb.net:27017,cluster0-shard-00-02.bffsy.mongodb.net:27017/Entertainment-hunt?ssl=true&replicaSet=atlas-13akp3-shard-0&authSource=admin&retryWrites=true&w=majority');
+  mongoose.connect(process.env.MONGO_URL);
   crypto.main().catch(err => console.log(err));
   statics.main().catch((err) => console.log(err));
   game.main().catch(err => console.log(err));
